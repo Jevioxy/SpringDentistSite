@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Изменение пользователей</title>
+</head>
+<body>
+<div class="header">
+  <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+  <a href="/">Главная</a>
+  <a href="/patient-treatments/">Лечение пациента</a>
+  <a href="/medical-records/">Медицинская карта</a>
+  <a href="/prescriptions/">Рецепты</a>
+  <a href="/patients/">Список пациентов</a>
+  <a href="/treatments/">Лечение</a>
+  <a href="/invoices/">Счета</a>
+  <a href="/dentists/">Стоматологи</a>
+  <a href="/appointments/">Записи на приём</a>
+  <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+  <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Изменение пользователей</h1>
+<form method="post" th:action="@{/admin/{id}/update(id=${user_object.ID_User})}">
+
+  <div>
+    <input type="text" th:value="${user_object.username}" name="username">
+  </div>
+  <div th:each="role : ${roles}" >
+    <input  type="checkbox" th:id="${role}"
+           th:name="${'roles[]'}" th:value="${role}"
+           th:checked="${#lists.contains(user_object.roles,role)}">
+    <label th:text="${role}"></label>
+  </div>
+  <button class="btn btn-primary" type="submit">Изменить</button>
+</form>
+<a th:href="'/admin/' + ${user_object.ID_User}">Назад</a>
+
+</div>
+</body>
+</html>

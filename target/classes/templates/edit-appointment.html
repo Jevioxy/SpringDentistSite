@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение записи на приём</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+<h1>Изменение записи на приём</h1>
+<form th:object="${appointment}" th:action="@{'/appointments/' + ${appointment.id}}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label >Дата и время:</label>
+    <input type="datetime-local" th:field="*{appointmentDateTime}" required="required" />
+
+    <label >Описание:</label>
+    <input type="text" th:field="*{description}" required="required" />
+
+    <label >Продолжительность:</label>
+    <input type="text" th:field="*{duration}" required="required" />
+    <label >Выберите рецерт:</label>
+
+    <select id="prescription" name="prescriptionId">
+        <option th:each="prescription : ${prescriptions}" th:value="${prescription.id}" th:text="${prescription.application}"></option>
+    </select>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+
+<a th:href="@{'/appointments/' + ${appointment.id}}">Назад к записям на приём</a>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Просмотр счета</title>
+</head>
+<body>
+<div class="header">
+  <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+  <div class="menu-item">
+    <a href="/">Главная</a>
+    <div class="submenu">
+      <a href="/admin/users">Роли</a>
+    </div>
+  </div>
+  <a href="/patient-treatments/">Лечение пациента</a>
+  <a href="/medical-records/">Медицинская карта</a>
+  <a href="/prescriptions/">Рецепты</a>
+  <a href="/patients/">Список пациентов</a>
+  <a href="/treatments/">Лечение</a>
+  <a href="/invoices/">Счета</a>
+  <a href="/dentists/">Стоматологи</a>
+  <a href="/appointments/">Записи на приём</a>
+  <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+  <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Просмотр счета</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Пациент</th>
+    <th>Возраст</th>
+    <th>Адрес проживания</th>
+    <th>Сумма</th>
+    <th>Оплачен</th>
+  </tr>
+  <tr th:object="${invoice}">
+    <td th:text="*{id}"></td>
+    <td th:text="${invoice.patient.name}"></td>
+    <td th:text="${invoice.patient.age}"></td>
+    <td th:text="${invoice.patient.address}"></td>
+    <td th:text="*{amount}"></td>
+    <td th:text="${invoice.isPaid}"></td>
+</table>
+<a th:href="@{/invoices/}" class="btn btn-primary">Вернуться к списку счетов</a>
+</body>
+</html>

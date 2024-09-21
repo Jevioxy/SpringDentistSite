@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Все Лечение пациентов</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Все Лечение пациентов</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Пациент</th>
+        <th>Лечение</th>
+    </tr>
+    <tr th:each="patientTreatment : ${patientTreatments}">
+        <td th:text="${patientTreatment.id}"></td>
+        <td th:text="${patientTreatment.patient.name}"></td>
+        <td th:text="${patientTreatment.treatment.name}"></td>
+        <td>
+            <a th:href="@{/patient-treatments/{id}(id=${patientTreatment.id})}">Подробнее</a>
+            <a th:href="@{/patient-treatments/{id}/edit(id=${patientTreatment.id})}">Редактировать</a>
+            <a th:href="@{/patient-treatments/{id}/delete(id=${patientTreatment.id})}">Удалить</a>
+        </td>
+
+    </tr>
+</table>
+<a href="/patient-treatments/create"class="btn btn-primary">Создать лечение пациента</a>
+<a href="/patients/create-patient">Добавить пациента</a>
+<a href="/treatments/create-treatment">Добавить лечение</a>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Все записи на приём</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Все записи на приём</h1>
+<form th:action="@{/appointments/}" method="get">
+    <input type="text" name="description" placeholder="Поиск по описанию">
+    <button type="submit" class="btn btn-primary">Поиск</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Дата и время</th>
+        <th>Описание</th>
+        <th>Продолжительность</th>
+        <th>Предположительно лечение</th> <!--  рецепт внешний -->
+    </tr>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.id}"></td>
+        <td th:text="${appointment.appointmentDateTime}"></td>
+        <td th:text="${appointment.description}"></td>
+        <td th:text="${appointment.duration}"></td>
+
+         <td th:text="${appointment.prescription.application}"></td>
+            <td><a th:href="@{/appointments/{id}(id=${appointment.id})}">Подробнее</a></td>
+            <td><a th:href="@{/appointments/{id}/edit(id=${appointment.id})}">Редактировать</a></td>
+            <td><a th:href="@{/appointments/{id}/delete(id=${appointment.id})}">Удалить</a></td>
+        </tr>
+    </table>
+    <a href="/appointments/create-appointment">Создать запись на приём</a>
+    </body>
+    </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Редактирование медицинской записи</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Редактирование рецепта</h1>
+<form th:object="${prescription}" th:action="@{/prescriptions/{id}/edit(id=${prescription.id})}" method="post">
+    <input type="hidden" id="id" name="id" th:field="*{id}">
+    <label >Выберите врача:</label>
+    <select id="dentist" name="dentistId">
+        <option th:each="dentist : ${dentists}" th:value="${dentist.id}" th:text="${dentist.name}"></option>
+    </select>
+
+
+    <label for="medicineName">Название лекарства:</label>
+    <input type="text" id="medicineName" name="medicineName" th:field="*{medicineName}" required>
+
+    <label for="application">Назначение дозировки:</label>
+    <input type="text" id="application" name="application" th:field="*{application}">
+
+
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+<a th:href="@{/prescriptions/}" class="btn btn-primary">Вернуться к списку рецептов</a>
+</body>
+</html>

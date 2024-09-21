@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Все пользователи</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <a href="/">Главная</a>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Все пользователи</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Пользователи</th>
+        <th>Роль</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${user_list}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+            <a th:href="@{/admin/{id}(id=${user.getID_User()})}">Подробнее..</a>
+            <a th:href="@{/admin/{id}/update(id=${user.getID_User()})}">Изменить</a>
+            <a th:href="@{/admin/{id}/delete(id=${user.getID_User()})}">Удалить</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/" >Назад</a>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Редактировать запись о враче</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+<h1>Редактировать запись о враче</h1>
+<form th:action="@{/dentists/{id}/edit(id=${dentist.id})}" method="post" th:object="${dentist}">
+    <input type="hidden" id="id" name="id" th:field="*{id}">
+
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+
+    <label for="specialization">Специализация:</label>
+    <input type="text" id="specialization" name="specialization" th:field="*{specialization}" required>
+
+    <label for="licenseNumber">Лицензионный номер:</label>
+    <input type="text" id="licenseNumber" name="licenseNumber" th:field="*{licenseNumber}" required>
+
+    <label for="clinicName">Название клиники:</label>
+    <input type="text" id="clinicName" name="clinicName" th:field="*{clinicName}" required>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a th:href="@{'/dentists/' + ${dentist.id}}">Назад к врачам всем</a>
+
+</form>
+
+</body>
+</html>

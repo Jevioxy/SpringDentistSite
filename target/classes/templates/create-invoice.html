@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Создание счета</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Создание счета</h1>
+<form th:action="@{/invoices/create-invoice}" method="post" th:object="${invoice}">
+    <label for="patient">Пациент:</label>
+    <select class="form-control" id="patient" name="patient.id">
+        <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.name}"></option>
+    </select>
+
+    <label for="amount">Сумма:</label>
+    <input type="text" id="amount" name="amount" th:field="*{amount}" required>
+
+    <label for="isPaid">Оплачен:</label>
+    <input type="text" id="isPaid" name="isPaid" th:field="*{isPaid}" required>
+
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+<a th:href="@{/invoices/}" class="btn btn-primary">Вернуться к списку счетов</a>
+
+<a href="/patients/create-patient">Добавить пациента</a>
+</body>
+</html>

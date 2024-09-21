@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Создание нового пациента</title>
+</head>
+<body>
+<div class="header">
+  <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+  <div class="menu-item">
+    <a href="/">Главная</a>
+    <div class="submenu">
+      <a href="/admin/users">Роли</a>
+    </div>
+  </div>
+  <a href="/patient-treatments/">Лечение пациента</a>
+  <a href="/medical-records/">Медицинская карта</a>
+  <a href="/prescriptions/">Рецепты</a>
+  <a href="/patients/">Список пациентов</a>
+  <a href="/treatments/">Лечение</a>
+  <a href="/invoices/">Счета</a>
+  <a href="/dentists/">Стоматологи</a>
+  <a href="/appointments/">Записи на приём</a>
+  <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+  <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+<h1>Создание нового пациента</h1>
+
+<form th:action="@{/patients/create-patient}" method="post" th:object="${patient}">
+  <label for="firstName">ФИО:</label>
+  <input type="text" id="firstName" name="firstName" th:field="*{name}" required>
+
+  <label for="phoneNumber">Возраст:</label>
+  <input type="text" id="age" name="age" th:field="*{age}" required>
+
+  <label for="phoneNumber">Телефон:</label>
+  <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" required>
+  <label for="phoneNumber">Адрес проживания:</label>
+  <input type="text" id="address" name="address" th:field="*{address}" required>
+  <label for="prescriptionId">Рецепт:</label>
+  <select class="form-control" id="prescriptionId" name="prescriptionId">
+    <option th:each="prescription : ${prescriptions}" th:value="${prescription.id}" th:text="${prescription.application}"></option>
+  </select>
+  <button class="btn btn-primary" type="submit">Создать</button>
+
+</form>
+<a th:href="@{/patients/}">Назад к списку пациентов</a>
+</body>
+</html>

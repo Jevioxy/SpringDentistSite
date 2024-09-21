@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Все медицинские записи</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Все медицинские записи</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Пациент</th>
+        <th>Диагноз</th>
+        <th>Лечение</th>
+    </tr>
+    <tr th:each="medicalRecord : ${medicalRecords}">
+        <td th:text="${medicalRecord.id}"></td>
+        <td th:text="${medicalRecord.patient.name}"></td>
+        <td th:text="${medicalRecord.diagnosis}"></td>
+        <td th:text="${medicalRecord.treatment}"></td>
+        <td>
+            <a th:href="@{/medical-records/{id}(id=${medicalRecord.id})}">Подробнее</a>
+            <a th:href="@{/medical-records/{id}/edit(id=${medicalRecord.id})}">Редактировать</a>
+            <a th:href="@{/medical-records/{id}/delete(id=${medicalRecord.id})}">Удалить</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/medical-records/create}" class="btn btn-primary">Создать мед. карту</a>
+<a href="/patients/create-patient">Добавить пациента</a>
+</body>
+</html>

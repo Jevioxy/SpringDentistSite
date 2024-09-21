@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Информация о пациенте</title>
+</head>
+<body>
+<div class="header">
+    <img class="centered-image" src="/css/icon.png" width="40" height="40"  />
+    <div class="menu-item">
+        <a href="/">Главная</a>
+        <div class="submenu">
+            <a href="/admin/users">Роли</a>
+        </div>
+    </div>
+    <a href="/patient-treatments/">Лечение пациента</a>
+    <a href="/medical-records/">Медицинская карта</a>
+    <a href="/prescriptions/">Рецепты</a>
+    <a href="/patients/">Список пациентов</a>
+    <a href="/treatments/">Лечение</a>
+    <a href="/invoices/">Счета</a>
+    <a href="/dentists/">Стоматологи</a>
+    <a href="/appointments/">Записи на приём</a>
+    <a href="/login" style="background-color: #ea30f6">Авторизация</a>
+    <a href="/registration" style="background-color: #ea30f6">Регистрация</a>
+</div>
+
+<h1>Информация о пациенте</h1>
+
+<p>ID: <span th:text="${patient.id}"></span></p>
+<p>Фио: <span th:text="${patient.name}"></span></p>
+<p>Возраст: <span th:text="${patient.age}"></span></p>
+<p>Телефон: <span th:text="${patient.phoneNumber}"></span></p>
+<p>Адрес проживания: <span th:text="${patient.address}"></span></p>
+<p>Рецепт от чего: <span th:text="${patient.prescription.application}"></span></p>
+<p>Назначение: <span th:text="${patient.prescription.medicineName}"></span></p>
+
+
+<a th:href="@{/patients/}">Назад к списку пациентов</a>
+</body>
+</html>
